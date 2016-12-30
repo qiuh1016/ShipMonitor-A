@@ -1,6 +1,7 @@
 package com.cetcme.shipmonitor.Fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cetcme.shipmonitor.ExpandableListViewActivity;
+import com.cetcme.shipmonitor.MoreInfoActivity;
 import com.cetcme.shipmonitor.R;
 
 
@@ -61,9 +63,10 @@ public class ShipsFragment extends Fragment {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                // TODO Auto-generated method stub
-                Toast.makeText(getActivity(), "你单击了："
-                        +adapter.getChild(groupPosition, childPosition), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "你单击了：" + adapter.getChild(groupPosition, childPosition), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), MoreInfoActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.push_left_in_no_alpha, R.anim.push_left_out_no_alpha);
                 return true;
             }
         });

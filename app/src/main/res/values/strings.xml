@@ -10,6 +10,18 @@
     <string name="fragment_name_2">历史查询</string>
     <string name="fragment_name_3">船舶档案</string>
     <string name="fragment_name_4">我的</string>
+    
+    <!--船舶信息-->
+    <string name="basic_info">基本信息</string>
+    <string name="ship_size">船舶尺寸</string>
+    <string name="ship_volume">船舶容积</string>
+    <string name="manager_info">管理信息</string>
+
+    <!--发动机信息-->
+    <string name="more_info_tab1_text">完车</string>
+    <string name="more_info_tab2_text">正车合排</string>
+    <string name="more_info_tab3_text">驾驶室</string>
+    <string name="more_info_tab4_text">闭环控制</string>
 
     <!--record-->
     <string name="hello_world">测试AudioRecord，实现录音功能</string>

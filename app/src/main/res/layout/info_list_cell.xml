@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/imageView_in_List_Cell"
-        android:layout_height="18dp"
-        android:layout_width="18dp"
-        android:src="@drawable/setting_arrow_big"/>
+        android:layout_width="16dp"
+        android:src="@drawable/setting_arrow_big"
+        android:layout_height="16dp"/>
 
 </LinearLayout>

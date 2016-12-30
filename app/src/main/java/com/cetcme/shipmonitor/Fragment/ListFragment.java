@@ -17,8 +17,6 @@ import java.util.LinkedList;
 
 public class ListFragment extends Fragment {
 
-
-
     public static ListFragment newInstance(String param1) {
         ListFragment fragment = new ListFragment();
         Bundle args = new Bundle();

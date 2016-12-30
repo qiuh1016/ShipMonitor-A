@@ -68,19 +68,19 @@ public class InfoFragment extends Fragment {
         dataList = new ArrayList<>();
 
         Map<String, Object> map = new HashMap<>();
-        map.put("title", "BASIC INFO");
+        map.put("title", getString(R.string.basic_info));
         dataList.add(map);
 
         map = new HashMap<>();
-        map.put("title", "SIZE");
+        map.put("title", getString(R.string.ship_size));
         dataList.add(map);
 
         map = new HashMap<>();
-        map.put("title", "VOLUME");
+        map.put("title", getString(R.string.ship_volume));
         dataList.add(map);
 
         map = new HashMap<>();
-        map.put("title", "MANAGE INFO");
+        map.put("title", getString(R.string.manager_info));
         dataList.add(map);
 
         return dataList;
