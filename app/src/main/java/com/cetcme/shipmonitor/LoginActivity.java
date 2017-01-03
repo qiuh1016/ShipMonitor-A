@@ -18,12 +18,13 @@ public class LoginActivity extends AppCompatActivity {
     private void initTitleView() {
         QHTitleView qhTitleView = (QHTitleView) findViewById(R.id.nav_main_in_login_activity);
         qhTitleView.setTitle("登陆");
-        qhTitleView.setBackView(0);
+        qhTitleView.setBackView(R.drawable.icon_back_button);
         qhTitleView.setRightView(0);
         qhTitleView.setClickCallback(new QHTitleView.ClickCallback() {
             @Override
             public void onBackClick() {
                 //
+                onBackPressed();
             }
 
             @Override

@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <include layout="@layout/view_pager_in_offline_map_activity"/>
+    <include layout="@layout/view_pager_in_more_info_activity"/>
 
     <LinearLayout
         android:layout_width="match_parent"

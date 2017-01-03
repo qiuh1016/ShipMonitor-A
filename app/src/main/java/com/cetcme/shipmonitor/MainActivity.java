@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         qhTitleView = (QHTitleView) findViewById(R.id.main_QHTitleView);
         qhTitleView.setTitle("main");
         qhTitleView.setBackView(0);
-        qhTitleView.setRightView(0);
+        qhTitleView.setRightView(R.drawable.add_button);
         qhTitleView.setClickCallback(new QHTitleView.ClickCallback() {
             @Override
             public void onBackClick() {
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onRightClick() {
-                //
+                Log.i("11", "onRightClick: 111");
             }
         });
     }

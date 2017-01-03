@@ -32,16 +32,13 @@ public class ShipsFragment extends Fragment {
     int[] logos = new int[] { R.drawable.tab1, R.drawable.tab2,R.drawable.tab3};
 
     //设置组视图的显示文字
-    private String[] category = new String[] { "长风77", "建工86", "xxx", "长风77", "建工86", "xxx" };
+    private String[] category = new String[] { "长风77", "建工86", "xxx" };
 
     //子视图显示文字
     private String[][] subCategory = new String[][] {
             { "左机：宁动6700", "右机：宁动6700" },
             { "左机：宁动6700", "右机：宁动6700" },
-            { "左机：宁动6700", "右机：宁动6700" },
-            { "左机：宁动6700", "右机：宁动6700" },
-            { "左机：宁动6700", "右机：宁动6700" },
-            { "左机：宁动6700", "右机：宁动6700" },
+            { "左机：宁动6700", "右机：宁动6700" }
     };
 
     //子视图图片
