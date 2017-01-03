@@ -27,6 +27,8 @@
         <activity android:name=".ExpandableListViewActivity">
         </activity>
         <activity android:name=".MoreInfoActivity"/>
+        <activity android:name=".LoginActivity">
+        </activity>
     </application>
 
 </manifest>

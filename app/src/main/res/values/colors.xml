@@ -5,7 +5,10 @@
     <color name="colorAccent">#FF4081</color>
     <color name="littleGray">#EEEEEE</color>
 
+    <color name="main_color">#059cd4</color>
     <color name="tab_text_selected">#303F9F</color>
+    <color name="tab_text_normal">#696969</color>
+    <color name="border_clo">#ccc</color>
 
     <color name="text_color">#333333</color>
 </resources>

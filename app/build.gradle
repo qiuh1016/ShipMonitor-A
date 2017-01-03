@@ -34,4 +34,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'com.kaopiz:kprogresshud:1.0.5'
 }

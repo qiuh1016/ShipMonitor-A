@@ -2,15 +2,18 @@
     <string name="app_name">ShipMonitor</string>
 
     <!--服务器和API地址-->
-    <string name="server_ip">http://114.55.101.20:11000</string>
+    <string name="server_ip">http://114.55.101.20:8888</string>
     <string name="real_time_info">/index?c=curStatus</string>
+
+    <!--登陆界面title-->
+    <string name="title_login_view">智能船舶船东管理APP</string>
 
     <!--首页的四个标签-->
     <string name="fragment_name_1">实时状态</string>
     <string name="fragment_name_2">历史查询</string>
     <string name="fragment_name_3">船舶档案</string>
     <string name="fragment_name_4">我的</string>
-    
+
     <!--船舶信息-->
     <string name="basic_info">基本信息</string>
     <string name="ship_size">船舶尺寸</string>

@@ -60,12 +60,14 @@ public class MoreInfoActivity extends FragmentActivity {
     private List<Fragment> fragments = new ArrayList<>();
 
     private Resources res;
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_info);
         res = getResources();
+        title = getIntent().getExtras().getString("title");
         initNavigationView();
         initViewPager();
 
@@ -88,7 +90,7 @@ public class MoreInfoActivity extends FragmentActivity {
 
     private void initNavigationView() {
         navigationView = (QHTitleView) findViewById(R.id.nav_main_in_sign_activity);
-        navigationView.setTitle("长风77左机");
+        navigationView.setTitle(title);
         navigationView.setBackView(R.drawable.icon_back_button);
         navigationView.setRightView(0);
         navigationView.setClickCallback(new QHTitleView.ClickCallback() {

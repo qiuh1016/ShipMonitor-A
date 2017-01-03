@@ -28,6 +28,26 @@ public class ShipsFragment extends Fragment {
 
     private ExpandableListView list;
 
+    //设置组视图的图片
+    int[] logos = new int[] { R.drawable.tab1, R.drawable.tab2,R.drawable.tab3};
+
+    //设置组视图的显示文字
+    private String[] category = new String[] { "长风77", "建工86", "xxx" };
+
+    //子视图显示文字
+    private String[][] subCategory = new String[][] {
+            { "左机：宁动6700", "右机：宁动6700" },
+            { "左机：宁动6700", "右机：宁动6700" },
+            { "左机：宁动6700", "右机：宁动6700" },
+    };
+
+    //子视图图片
+    public int[][] subLogos = new int[][] {
+            { R.drawable.tab1, R.drawable.tab1, R.drawable.tab1},
+            { R.drawable.tab1, R.drawable.tab1, R.drawable.tab1},
+            { R.drawable.tab1, R.drawable.tab1, R.drawable.tab1}
+    };
+
     public static ShipsFragment newInstance(String param1) {
         ShipsFragment fragment = new ShipsFragment();
         Bundle args = new Bundle();
@@ -63,19 +83,16 @@ public class ShipsFragment extends Fragment {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                Toast.makeText(getActivity(), "你单击了：" + adapter.getChild(groupPosition, childPosition), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), "你单击了：" + adapter.getChild(groupPosition, childPosition), Toast.LENGTH_LONG).show();
+
+                //打开详细界面
                 Intent intent = new Intent(getActivity(), MoreInfoActivity.class);
+                Bundle titleBundle = new Bundle();
+                titleBundle.putString("title", category[groupPosition] + " " + subCategory[groupPosition][childPosition]);
+                intent.putExtras(titleBundle);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.push_left_in_no_alpha, R.anim.push_left_out_no_alpha);
                 return true;
-            }
-        });
-
-        list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                Log.i(TAG, "onGroupClick: " + groupPosition);
-                return false;
             }
         });
 
@@ -83,26 +100,6 @@ public class ShipsFragment extends Fragment {
     }
 
     class ExpandableListAdapter extends BaseExpandableListAdapter {
-
-        //设置组视图的图片
-        int[] logos = new int[] { R.drawable.tab1, R.drawable.tab2,R.drawable.tab3};
-
-        //设置组视图的显示文字
-        private String[] category = new String[] { "长风77", "建工86", "xxx" };
-
-        //子视图显示文字
-        private String[][] subCategory = new String[][] {
-                { "左机：宁动6700", "右机：宁动6700" },
-                { "左机：宁动6700", "右机：宁动6700" },
-                { "左机：宁动6700", "右机：宁动6700" },
-        };
-
-        //子视图图片
-        public int[][] subLogos = new int[][] {
-                { R.drawable.tab1, R.drawable.tab1, R.drawable.tab1},
-                { R.drawable.tab1, R.drawable.tab1, R.drawable.tab1},
-                { R.drawable.tab1, R.drawable.tab1, R.drawable.tab1}
-        };
 
         //定义一个显示文字信息的方法
         TextView getTextView(){
