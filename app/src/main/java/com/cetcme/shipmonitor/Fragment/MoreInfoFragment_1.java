@@ -30,7 +30,7 @@ public class MoreInfoFragment_1 extends Fragment {
 
 
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_more_info_1, container, false);
+        view = inflater.inflate(R.layout.fragment_more_info_fragment_1, container, false);
         context = this.getActivity();
 
         mTextView = (TextView) view.findViewById(R.id.data_textView_in_more_info);

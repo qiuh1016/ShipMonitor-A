@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cetcme.shipmonitor.Fragment.MoreInfoFragment_1;
+import com.cetcme.shipmonitor.Fragment.MoreInfoFragment_2;
 import com.qiuhong.qhlibrary.QHTitleView.QHTitleView;
 
 import java.util.ArrayList;
@@ -158,7 +159,7 @@ public class MoreInfoActivity extends FragmentActivity {
         tab3_text.setOnClickListener(new TabOnClickListener(2));
         tab4_text.setOnClickListener(new TabOnClickListener(3));
 
-        fragments.add(new MoreInfoFragment_1());
+        fragments.add(new MoreInfoFragment_2());
         fragments.add(new MoreInfoFragment_1());
         fragments.add(new MoreInfoFragment_1());
         fragments.add(new MoreInfoFragment_1());
