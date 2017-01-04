@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,24 +42,39 @@ public class MoreInfoFragment_2 extends Fragment {
 
 
     private void initView(View view) {
+
+        int screenWidth = getActivity().getWindowManager().getDefaultDisplay().getWidth();
+        int margin = DensityUtil.dip2px(getActivity(), 30);
+        int frameWidth = (screenWidth - 3 * margin) / 2;
+
         //改变两个横向layout的宽高
         LinearLayout zhuanpanLayout = (LinearLayout) view.findViewById(R.id.zhuanpan_layout);
 
-        int width = getActivity().getWindowManager().getDefaultDisplay().getWidth();
-        int margins = DensityUtil.dip2px(getActivity(), 10);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width - 2 * margins, width / 4 + margins);
-        params.setMargins(margins, margins, margins, margins);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(screenWidth, frameWidth * 6 / 10);
+        params.setMargins(0, margin / 3, 0, 0);
         zhuanpanLayout.setLayoutParams(params);
 
         view.findViewById(R.id.zhuanpan_layout_2).setLayoutParams(params);
 
+        //设置frame 宽等于高
+        FrameLayout frame_1 = (FrameLayout) view.findViewById(R.id.frame_1);
+        FrameLayout frame_2 = (FrameLayout) view.findViewById(R.id.frame_2);
+        FrameLayout frame_3 = (FrameLayout) view.findViewById(R.id.frame_3);
+        FrameLayout frame_4 = (FrameLayout) view.findViewById(R.id.frame_4);
+        LinearLayout.LayoutParams newFrameLp = new LinearLayout.LayoutParams(frameWidth , frameWidth);
+        newFrameLp.setMargins(margin, 0, 0 ,0);
+        frame_1.setLayoutParams(newFrameLp);
+        frame_2.setLayoutParams(newFrameLp);
+        frame_3.setLayoutParams(newFrameLp);
+        frame_4.setLayoutParams(newFrameLp);
+
         //隐藏第四个转盘
-        view.findViewById(R.id.zhuanpan_4).setVisibility(View.INVISIBLE);
+        view.findViewById(R.id.frame_4).setVisibility(View.INVISIBLE);
 
         //设置执行档位layout尺寸
-        int layoutWidth = width - 2 * margins;
+        int layoutWidth = screenWidth - 2 * margin;
         LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(layoutWidth,  layoutWidth * 555 / 1620 );
-        params1.setMargins(margins, margins * 2, margins, margins);
+        params1.setMargins(margin, margin * 2, margin, margin);
         view.findViewById(R.id.zhidingdang).setLayoutParams(params1);
     }
 

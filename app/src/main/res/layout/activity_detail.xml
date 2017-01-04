@@ -1,0 +1,317 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".DetailActivity"
+              android:orientation="vertical"
+              android:background="#EEEEEE">
+
+    <!--导航栏-->
+    <com.qiuhong.qhlibrary.QHTitleView.QHTitleView
+        android:id="@+id/nav_main_in_detail_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--状态栏-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="..."
+                    android:id="@+id/detail_text_1"
+                    android:textColor="@color/text_color"
+                    android:background="@color/detail_label_background"
+                    android:textAlignment="center"
+                    android:gravity="center"/>
+
+                <android.support.v4.widget.Space
+                    android:layout_width="2dp"
+                    android:layout_height="2dp"/>
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="...."
+                    android:id="@+id/detail_text_2"
+                    android:textColor="@color/text_color"
+                    android:background="@color/detail_label_background"
+                    android:textAlignment="center"
+                    android:gravity="center"/>
+
+                <android.support.v4.widget.Space
+                    android:layout_width="2dp"
+                    android:layout_height="2dp"/>
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="..."
+                    android:id="@+id/detail_text_3"
+                    android:textColor="@color/text_color"
+                    android:background="@color/detail_label_background"
+                    android:textAlignment="center"
+                    android:gravity="center"/>
+
+                <android.support.v4.widget.Space
+                    android:layout_width="2dp"
+                    android:layout_height="2dp"/>
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="..."
+                    android:id="@+id/detail_text_4"
+                    android:textColor="@color/text_color"
+                    android:background="@color/detail_label_background"
+                    android:textAlignment="center"
+                    android:gravity="center"/>
+
+
+            </LinearLayout>
+
+            <!--转盘标题-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="主机转速"
+                    android:textColor="@color/text_color"
+                    android:textAlignment="center"/>
+
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="艉轴转速"
+                    android:textColor="@color/text_color"
+                    android:textAlignment="center"/>
+
+            </LinearLayout>
+
+            <!--转盘-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                android:id="@+id/zhuanpan_layout">
+
+
+                <FrameLayout
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_weight="1"
+                    android:id="@+id/frame_1"
+                    android:background="@drawable/pic_main_speed">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/pic_main_speed_point"
+                        android:id="@+id/imageView_point"/>
+
+                </FrameLayout>
+
+
+                <FrameLayout
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_weight="1"
+                    android:id="@+id/frame_2"
+                    android:background="@drawable/pic_weizhou_speed">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/pic_main_speed_point"
+                        android:id="@+id/imageView_point_2"/>
+
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+            <!--转盘数值-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="-5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="100 RPM"
+                    android:textColor="@color/pointer_color"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:id="@+id/value_text_1"/>
+
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0 PRM"
+                    android:textColor="@color/pointer_color"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:id="@+id/value_text_2"/>
+
+            </LinearLayout>
+
+            <!--转盘标题-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="主机供油量"
+                    android:textColor="@color/text_color"
+                    android:textAlignment="center"/>
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textColor="@color/text_color"
+                    android:textAlignment="center"/>
+
+            </LinearLayout>
+
+            <!--转盘-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                android:id="@+id/zhuanpan_layout_2">
+
+
+                <FrameLayout
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_weight="1"
+                    android:id="@+id/frame_3"
+                    android:background="@drawable/pic_weizhou_speed">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/pic_main_speed_point"
+                        android:id="@+id/imageView_point_3"/>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/pic_weizhou_speed"
+                    android:id="@+id/frame_4">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/pic_main_speed_point"
+                        android:id="@+id/imageView_point_4"/>
+
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+            <!--转盘数值-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="-5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0%"
+                    android:textColor="@color/pointer_color"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:id="@+id/value_text_3"/>
+
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textColor="@color/pointer_color"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:id="@+id/value_text_4"/>
+
+            </LinearLayout>
+
+            <!--档位-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                android:id="@+id/zhidingdang">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/pic_dang"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
+</LinearLayout>

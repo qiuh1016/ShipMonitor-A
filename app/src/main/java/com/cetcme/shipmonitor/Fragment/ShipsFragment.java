@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cetcme.shipmonitor.DetailActivity;
 import com.cetcme.shipmonitor.ExpandableListViewActivity;
 import com.cetcme.shipmonitor.MoreInfoActivity;
 import com.cetcme.shipmonitor.R;
@@ -86,7 +87,7 @@ public class ShipsFragment extends Fragment {
 //                Toast.makeText(getActivity(), "你单击了：" + adapter.getChild(groupPosition, childPosition), Toast.LENGTH_LONG).show();
 
                 //打开详细界面
-                Intent intent = new Intent(getActivity(), MoreInfoActivity.class);
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
                 Bundle titleBundle = new Bundle();
                 titleBundle.putString("title", category[groupPosition] + " " + subCategory[groupPosition][childPosition]);
                 intent.putExtras(titleBundle);

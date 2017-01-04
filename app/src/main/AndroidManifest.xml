@@ -29,6 +29,8 @@
         <activity android:name=".MoreInfoActivity"/>
         <activity android:name=".LoginActivity">
         </activity>
+        <activity android:name=".DetailActivity">
+        </activity>
     </application>
 
 </manifest>

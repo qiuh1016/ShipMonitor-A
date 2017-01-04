@@ -10,5 +10,8 @@
     <color name="tab_text_normal">#696969</color>
     <color name="border_clo">#ccc</color>
 
+    <color name="detail_label_background">#A3C8E9</color>
+
     <color name="text_color">#333333</color>
+    <color name="pointer_color">#4A90E2</color>
 </resources>
