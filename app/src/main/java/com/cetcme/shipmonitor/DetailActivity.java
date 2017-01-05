@@ -2,10 +2,12 @@ package com.cetcme.shipmonitor;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,9 +28,13 @@ public class DetailActivity extends AppCompatActivity {
 
     private String title;
 
-    private TextView pointImage;
+    private TextView pointImage1;
     private TextView pointImage2;
     private TextView pointImage3;
+    private TextView pointImage4;
+
+    private TextView pointImage5;
+    private TextView pointImage6;
 
     private TextView detailText_1;
     private TextView detailText_2;
@@ -37,6 +43,13 @@ public class DetailActivity extends AppCompatActivity {
     private TextView valueText_1;
     private TextView valueText_2;
     private TextView valueText_3;
+    private TextView valueText_4;
+
+    private TextView valueText_5;
+    private TextView valueText_6;
+
+    private int dangweiValue;
+
 
 
     @Override
@@ -47,13 +60,29 @@ public class DetailActivity extends AppCompatActivity {
         title = getIntent().getExtras().getString("title");
 
         getTestData();
+
         initNavigationView();
         initView();
-        initPointer();
         initTextView();
+        initPointer();
 
+        initValue();
 
+        updateValue();
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                currentMainSpeed = 1300;
+                currentWeiSpeed = 0;
+                currentOilPercent = 40;
+
+                currentShedingdang = 20;
+                currentZhixingdang = 30;
+
+                updateValue();
+            }
+        }, 5000);
 
     }
 
@@ -92,7 +121,7 @@ public class DetailActivity extends AppCompatActivity {
         //改变两个横向layout的宽高
         LinearLayout zhuanpanLayout = (LinearLayout) findViewById(R.id.zhuanpan_layout);
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(screenWidth, frameWidth * 6 / 10);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(screenWidth, frameWidth * 60 / 100);
         params.setMargins(0, margin / 5, 0, 0);
         zhuanpanLayout.setLayoutParams(params);
 
@@ -113,20 +142,35 @@ public class DetailActivity extends AppCompatActivity {
         //隐藏第四个转盘
         findViewById(R.id.frame_4).setVisibility(View.INVISIBLE);
 
-        //设置执行档位layout尺寸
-        int layoutWidth = screenWidth - 2 * margin;
-        LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(layoutWidth,  layoutWidth * 555 / 1620 );
-        params1.setMargins(margin, margin, margin, margin);
-        findViewById(R.id.zhidingdang).setLayoutParams(params1);
+        //设置档位layout尺寸
+        int layoutWidth = screenWidth - margin;
+        LinearLayout.LayoutParams dangweiLP = new LinearLayout.LayoutParams(layoutWidth,  layoutWidth * 555 / 1620 );
+        dangweiLP.setMargins(margin / 2, margin / 2, margin / 2, margin / 2);
+        findViewById(R.id.dangwei).setLayoutParams(dangweiLP);
+
+
+        //档位数值的尺寸
+        int dangweiMargin = DensityUtil.dip2px(this, 8);
+        int dangweiValueLayoutWidth = layoutWidth- DensityUtil.dip2px(this, 90);
+        LinearLayout.LayoutParams dangweiValueLP = new LinearLayout.LayoutParams(dangweiValueLayoutWidth, dangweiValueLayoutWidth * 15 / 524);
+        dangweiValueLP.setMargins(DensityUtil.dip2px(this, 50), dangweiMargin, DensityUtil.dip2px(this, 40), dangweiMargin);
+        findViewById(R.id.dangwei_value_layout).setLayoutParams(dangweiValueLP);
+
+        //
+        dangweiValue = dangweiValueLayoutWidth;
+
+
     }
 
     private void initPointer() {
-        pointImage = (TextView) findViewById(R.id.imageView_point);
+        pointImage1 = (TextView) findViewById(R.id.imageView_point);
         pointImage2 = (TextView) findViewById(R.id.imageView_point_2);
         pointImage3 = (TextView) findViewById(R.id.imageView_point_3);
-        rotateImage(pointImage, 0f, 180f);
-        rotateImage(pointImage2, 180f, 0f);
+        pointImage4 = (TextView) findViewById(R.id.imageView_point_4);
+        pointImage5 = (TextView) findViewById(R.id.imageView_point_5);
+        pointImage6 = (TextView) findViewById(R.id.imageView_point_6);
     }
+
 
     private void initTextView() {
         detailText_1 = (TextView) findViewById(R.id.detail_text_1);
@@ -137,29 +181,85 @@ public class DetailActivity extends AppCompatActivity {
         valueText_1 = (TextView) findViewById(R.id.value_text_1);
         valueText_2 = (TextView) findViewById(R.id.value_text_2);
         valueText_3 = (TextView) findViewById(R.id.value_text_3);
+        valueText_4 = (TextView) findViewById(R.id.value_text_4);
+
+        valueText_5 = (TextView) findViewById(R.id.value_text_5);
+        valueText_6 = (TextView) findViewById(R.id.value_text_6);
 
     }
 
 
+
+    int lastMainSpeed = 0;
+    int lastWeiSpeed = -1500;
+    int lastOilPercent = 0;
+
+    int lastShedingdang = 0;
+    int lastZhixingdang = 0;
+
+    int currentMainSpeed = 1500;
+    int currentWeiSpeed = -750;
+    int currentOilPercent = 60;
+
+    int currentShedingdang = 30;
+    int currentZhixingdang = -20;
+
+    private void initValue() {
+        moveImgae(pointImage5, 0.01f, dangweiValue / 2 - 2);
+        moveImgae(pointImage6, 0.01f, dangweiValue / 2 - 2);
+    }
+
+    private void updateValue() {
+        rotateImage(pointImage1, lastMainSpeed / 1500f * 180f           , currentMainSpeed / 1500f * 180f);
+        rotateImage(pointImage2, (lastWeiSpeed + 1500) / 3000f * 180f   , (currentWeiSpeed + 1500) / 3000f * 180f);
+        rotateImage(pointImage3, lastOilPercent / 100f * 180f          , currentOilPercent / 100f * 180f);
+        valueText_1.setText( currentMainSpeed + " RPM");
+        valueText_2.setText(currentWeiSpeed + " RPM");
+        valueText_3.setText(currentOilPercent + " %");
+
+        int moveDistace = dangweiValue / 2 - 2;
+
+//        moveImgae(pointImage5, Math.abs(currentShedingdang - lastShedingdang) / 50f * 5f, currentShedingdang / 50f * moveDistace + moveDistace);
+//        moveImgae(pointImage6, Math.abs(currentZhixingdang - lastZhixingdang) / 50f * 5f, currentZhixingdang / 50f * moveDistace + moveDistace);
+        moveImgae(pointImage5, 2f, currentShedingdang / 50f * moveDistace + moveDistace);
+        moveImgae(pointImage6, 2f, currentZhixingdang / 50f * moveDistace + moveDistace);
+
+        valueText_5.setText((currentShedingdang - lastShedingdang) * 2 + "%");
+        valueText_6.setText((currentZhixingdang - lastZhixingdang) * 2 + "%");
+        valueText_5.setText(currentShedingdang * 2 + "%");
+        valueText_6.setText(currentZhixingdang * 2 + "%");
+
+        lastMainSpeed = currentMainSpeed;
+        lastWeiSpeed = currentWeiSpeed;
+        lastOilPercent = currentOilPercent;
+        lastShedingdang = currentShedingdang;
+        lastZhixingdang = currentZhixingdang;
+    }
+
+
     private void rotateImage(View v, float from, float to) {
-        // 第二个参数"rotation"表明要执行旋转
         // 0f -> 360f，从旋转360度，也可以是负值，负值即为逆时针旋转，正值是顺时针旋转。
         ObjectAnimator anim = ObjectAnimator.ofFloat(v, "rotation", from, to);
 
-        // 动画的持续时间，执行多久？
-        anim.setDuration(10000);
+//        int t = (int) (Math.abs(to - from) / 180 * 1000 * 2);
+        int t = 2 * 1000;
+        anim.setDuration(t);
 
         // 回调监听
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float value = (Float) animation.getAnimatedValue();
             }
         });
 
-        // 正式开始启动执行动画
         anim.start();
+    }
+
+    private void moveImgae(View v, float time, float x) {
+        ObjectAnimator valueAnimator = ObjectAnimator.ofFloat(v, "translationX", x);
+        valueAnimator.setDuration((int)time * 1000);
+        valueAnimator.start();
     }
 
     private void getTestData() {
@@ -201,7 +301,8 @@ public class DetailActivity extends AppCompatActivity {
 //            mTextView.append("主机遥控编号：" + meCode + "\n");
 //            mTextView.append("当前车钟：" + code900 + "\n");
 
-            detailText_1.setText("辅车钟状态" + "\n");
+//            detailText_1.setText("辅车钟状态" + "\n");
+            detailText_1.setText("");
             switch (code901) {
                 case "0":
                     detailText_1.append("空");
@@ -247,7 +348,8 @@ public class DetailActivity extends AppCompatActivity {
 //            mTextView.append("主机设定转速：" + code904 + "RPM\n");
 
 
-            detailText_3.setText("控制位置" + "\n");
+//            detailText_3.setText("控制位置" + "\n");
+            detailText_3.setText("");
             switch (code905) {
                 case "0":
                     detailText_3.append("机旁");
@@ -263,7 +365,8 @@ public class DetailActivity extends AppCompatActivity {
                     break;
             }
 
-            detailText_4.setText("控制模式" + "\n");
+//            detailText_4.setText("控制模式" + "\n");
+            detailText_4.setText("");
             switch (code906) {
                 case "0":
                     detailText_4.append("闭环模式");
@@ -276,7 +379,8 @@ public class DetailActivity extends AppCompatActivity {
                     break;
             }
 
-            detailText_2.setText("齿轮箱状态" + "\n");
+//            detailText_2.setText("齿轮箱状态" + "\n");
+            detailText_2.setText("");
             switch (code907) {
                 case "0":
                     detailText_2.append("正车");
@@ -292,9 +396,9 @@ public class DetailActivity extends AppCompatActivity {
                     break;
             }
 
-            valueText_1.setText(code908 + " RPM\n");
-            valueText_2.setText(code909 + " RPM\n");
-            valueText_3.setText(code910 + " %\n");
+//            valueText_1.setText(code908 + " RPM\n");
+//            valueText_2.setText(code909 + " RPM\n");
+//            valueText_3.setText(code910 + " %\n");
 
 
         } catch (JSONException e) {
