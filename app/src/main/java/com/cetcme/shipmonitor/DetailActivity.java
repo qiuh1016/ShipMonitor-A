@@ -7,13 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.SyncHttpClient;
 import com.qiuhong.qhlibrary.QHTitleView.QHTitleView;
 import com.qiuhong.qhlibrary.Utils.DensityUtil;
 
@@ -24,7 +24,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private String TAG = "MoreInfoFragment_2";
+    private String TAG = "DetailActivity";
 
     private String title;
 
@@ -50,6 +50,26 @@ public class DetailActivity extends AppCompatActivity {
 
     private int dangweiValue;
 
+    int lastMainSpeed = 0;
+    int lastWeiSpeed = 0;
+    int lastOilPercent = 0;
+    int lastShedingdang = 0;
+    int lastZhixingdang = 0;
+
+//    int currentMainSpeed = 1500;
+//    int currentWeiSpeed = -750;
+//    int currentOilPercent = 60;
+//    int currentShedingdang = 30;
+//    int currentZhixingdang = -20;
+
+    int currentMainSpeed = 0;
+    int currentWeiSpeed = 0;
+    int currentOilPercent = 0;
+    int currentShedingdang = 0;
+    int currentZhixingdang = 0;
+
+    private Thread getDataThread;
+    private boolean toGetData = true;
 
 
     @Override
@@ -59,34 +79,46 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         title = getIntent().getExtras().getString("title");
 
-        getTestData();
-
         initNavigationView();
         initView();
-        initTextView();
-        initPointer();
 
-        initValue();
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                currentMainSpeed = 300;
+//                currentWeiSpeed = 200;
+//                currentOilPercent = 40;
+//
+//                currentShedingdang = 20;
+//                currentZhixingdang = 30;
+//
+//                updateValue();
+//            }
+//        }, 5000);
 
-        updateValue();
 
-        new Handler().postDelayed(new Runnable() {
+        final int sleepTime = 5;
+        getDataThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                currentMainSpeed = 1300;
-                currentWeiSpeed = 0;
-                currentOilPercent = 40;
+                while (toGetData) {
+                    Log.i(TAG, "run: to get data");
+                    getData();
 
-                currentShedingdang = 20;
-                currentZhixingdang = 30;
-
-                updateValue();
+                    //设置每次时间间隔；
+                    try {
+                        Thread.sleep(sleepTime * 1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-        }, 5000);
-
+        });
+        getDataThread.start();
     }
 
     public void onBackPressed() {
+        toGetData = false;
         super.onBackPressed();
         overridePendingTransition(R.anim.push_right_in_no_alpha,
                 R.anim.push_right_out_no_alpha);
@@ -159,6 +191,10 @@ public class DetailActivity extends AppCompatActivity {
         //
         dangweiValue = dangweiValueLayoutWidth;
 
+        initTextView();
+        initPointer();
+        initValue();
+
 
     }
 
@@ -170,7 +206,6 @@ public class DetailActivity extends AppCompatActivity {
         pointImage5 = (TextView) findViewById(R.id.imageView_point_5);
         pointImage6 = (TextView) findViewById(R.id.imageView_point_6);
     }
-
 
     private void initTextView() {
         detailText_1 = (TextView) findViewById(R.id.detail_text_1);
@@ -188,25 +223,13 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
-
-
-    int lastMainSpeed = 0;
-    int lastWeiSpeed = -1500;
-    int lastOilPercent = 0;
-
-    int lastShedingdang = 0;
-    int lastZhixingdang = 0;
-
-    int currentMainSpeed = 1500;
-    int currentWeiSpeed = -750;
-    int currentOilPercent = 60;
-
-    int currentShedingdang = 30;
-    int currentZhixingdang = -20;
-
     private void initValue() {
-        moveImgae(pointImage5, 0.01f, dangweiValue / 2 - 2);
-        moveImgae(pointImage6, 0.01f, dangweiValue / 2 - 2);
+        moveImage(pointImage5, 0.01f, dangweiValue / 2 - 2);
+        moveImage(pointImage6, 0.01f, dangweiValue / 2 - 2);
+
+        ObjectAnimator anim = ObjectAnimator.ofFloat(pointImage2, "rotation", 0f, 90f);
+        anim.setDuration(10);
+        anim.start();
     }
 
     private void updateValue() {
@@ -219,10 +242,10 @@ public class DetailActivity extends AppCompatActivity {
 
         int moveDistace = dangweiValue / 2 - 2;
 
-//        moveImgae(pointImage5, Math.abs(currentShedingdang - lastShedingdang) / 50f * 5f, currentShedingdang / 50f * moveDistace + moveDistace);
-//        moveImgae(pointImage6, Math.abs(currentZhixingdang - lastZhixingdang) / 50f * 5f, currentZhixingdang / 50f * moveDistace + moveDistace);
-        moveImgae(pointImage5, 2f, currentShedingdang / 50f * moveDistace + moveDistace);
-        moveImgae(pointImage6, 2f, currentZhixingdang / 50f * moveDistace + moveDistace);
+//        moveImage(pointImage5, Math.abs(currentShedingdang - lastShedingdang) / 50f * 5f, currentShedingdang / 50f * moveDistace + moveDistace);
+//        moveImage(pointImage6, Math.abs(currentZhixingdang - lastZhixingdang) / 50f * 5f, currentZhixingdang / 50f * moveDistace + moveDistace);
+        moveImage(pointImage5, 2f, currentShedingdang / 50f * moveDistace + moveDistace);
+        moveImage(pointImage6, 2f, currentZhixingdang / 50f * moveDistace + moveDistace);
 
         valueText_5.setText((currentShedingdang - lastShedingdang) * 2 + "%");
         valueText_6.setText((currentZhixingdang - lastZhixingdang) * 2 + "%");
@@ -235,7 +258,6 @@ public class DetailActivity extends AppCompatActivity {
         lastShedingdang = currentShedingdang;
         lastZhixingdang = currentZhixingdang;
     }
-
 
     private void rotateImage(View v, float from, float to) {
         // 0f -> 360f，从旋转360度，也可以是负值，负值即为逆时针旋转，正值是顺时针旋转。
@@ -256,22 +278,28 @@ public class DetailActivity extends AppCompatActivity {
         anim.start();
     }
 
-    private void moveImgae(View v, float time, float x) {
+    private void moveImage(View v, float time, float x) {
         ObjectAnimator valueAnimator = ObjectAnimator.ofFloat(v, "translationX", x);
         valueAnimator.setDuration((int)time * 1000);
         valueAnimator.start();
     }
 
-    private void getTestData() {
+    private void getData() {
         String url = getString(R.string.test_url);
 
-        AsyncHttpClient client = new AsyncHttpClient();
+        SyncHttpClient client = new SyncHttpClient();
         client.get(url, null, new JsonHttpResponseHandler("UTF-8"){
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onSuccess(int statusCode, Header[] headers, final JSONObject response) {
                 // If the response is JSONObject instead of expected JSONArray
                 Log.i("post", "onSuccess: " + response);
-                parseJSON(response);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        parseJSON(response);
+                    }
+                });
+
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
@@ -281,7 +309,6 @@ public class DetailActivity extends AppCompatActivity {
 
         });
     }
-
 
     private void parseJSON(JSONObject response) {
         try {
@@ -399,6 +426,15 @@ public class DetailActivity extends AppCompatActivity {
 //            valueText_1.setText(code908 + " RPM\n");
 //            valueText_2.setText(code909 + " RPM\n");
 //            valueText_3.setText(code910 + " %\n");
+
+            currentMainSpeed = Integer.parseInt(code908);
+            currentWeiSpeed = Integer.parseInt(code909);
+            currentOilPercent = Integer.parseInt(code910);
+            currentShedingdang = Integer.parseInt(code900);
+            currentZhixingdang = Integer.parseInt(code900);
+
+            updateValue();
+
 
 
         } catch (JSONException e) {
