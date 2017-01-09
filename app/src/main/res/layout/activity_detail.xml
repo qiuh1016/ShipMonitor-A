@@ -378,7 +378,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_weight="1"
-                        android:background="@drawable/pic_dang_back_kedu">
+                        android:background="@drawable/pic_dang_back_kedu_up">
 
                         <TextView
                             android:layout_width="2dp"
