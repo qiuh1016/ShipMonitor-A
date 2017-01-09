@@ -326,7 +326,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_weight="1"
-                        android:background="@drawable/pic_dang_back"
+                        android:background="@drawable/pic_dang_back_kedu"
                         android:id="@+id/dangwei_frame">
 
                         <TextView
@@ -358,7 +358,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:id="@+id/dangwei_value_layout"
-                    android:background="@drawable/pic_dang_value" />
+                    android:background="@drawable/pic_dang_value_kedu" />
 
                 <!--执行档-->
                 <LinearLayout
@@ -378,7 +378,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_weight="1"
-                        android:background="@drawable/pic_dang_back">
+                        android:background="@drawable/pic_dang_back_kedu">
 
                         <TextView
                             android:layout_width="2dp"

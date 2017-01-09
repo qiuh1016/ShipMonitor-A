@@ -245,12 +245,12 @@ public class DetailActivity extends AppCompatActivity {
 //        moveImage(pointImage5, Math.abs(currentShedingdang - lastShedingdang) / 50f * 5f, currentShedingdang / 50f * moveDistace + moveDistace);
 //        moveImage(pointImage6, Math.abs(currentZhixingdang - lastZhixingdang) / 50f * 5f, currentZhixingdang / 50f * moveDistace + moveDistace);
         moveImage(pointImage5, 2f, currentShedingdang / 50f * moveDistace + moveDistace);
-        moveImage(pointImage6, 2f, currentZhixingdang / 50f * moveDistace + moveDistace);
+        moveImage(pointImage6, 2f, currentZhixingdang / 100f * moveDistace + moveDistace);
 
         valueText_5.setText((currentShedingdang - lastShedingdang) * 2 + "%");
         valueText_6.setText((currentZhixingdang - lastZhixingdang) * 2 + "%");
         valueText_5.setText(currentShedingdang * 2 + "%");
-        valueText_6.setText(currentZhixingdang * 2 + "%");
+        valueText_6.setText(currentZhixingdang + "%");
 
         lastMainSpeed = currentMainSpeed;
         lastWeiSpeed = currentWeiSpeed;
@@ -399,10 +399,10 @@ public class DetailActivity extends AppCompatActivity {
                     detailText_4.append("闭环模式");
                     break;
                 case "1":
-                    detailText_3.append("开环模式");
+                    detailText_4.append("开环模式");
                     break;
                 default:
-                    detailText_3.append("有误");
+                    detailText_4.append("有误");
                     break;
             }
 
@@ -431,7 +431,32 @@ public class DetailActivity extends AppCompatActivity {
             currentWeiSpeed = Integer.parseInt(code909);
             currentOilPercent = Integer.parseInt(code910);
             currentShedingdang = Integer.parseInt(code900);
-            currentZhixingdang = Integer.parseInt(code900);
+
+            switch (code907) {
+                case "0":                                  // 正车
+                    currentZhixingdang = Integer.parseInt(code910);
+                    break;
+                case "1":                                  // 倒车
+                    currentZhixingdang = 0 - Integer.parseInt(code910);
+                    break;
+                case "2":                                  // 空车
+                    currentZhixingdang = 0;
+                    break;
+                default:                                   // 有误
+                    currentZhixingdang = 0;
+                    break;
+            }
+
+//
+//            if (currentShedingdang < 0) {
+//                currentZhixingdang = 0 - Integer.parseInt(code910);
+//            } else if (currentShedingdang > 0) {
+//                currentZhixingdang = Integer.parseInt(code910);
+//            } else {
+//                currentZhixingdang = Integer.parseInt(code910);
+//            }
+
+//            currentZhixingdang = Integer.parseInt(code900);
 
             updateValue();
 
