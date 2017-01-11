@@ -311,24 +311,34 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void parseJSON(JSONObject response) {
+
+        String meCode = "";
+        String code900 = "";
+        String code901 = "";
+        String code902 = "";
+        String code903 = "";
+        String code904 = "";
+        String code905 = "";
+        String code906 = "";
+        String code907 = "";
+        String code908 = "";
+        String code909 = "";
+        String code910 = "";
+
         try {
-            String meCode = response.getString("meCode");
-            String code900 = response.getString("900");
-            String code901 = response.getString("901");
-            String code902 = response.getString("902");
-            String code903 = response.getString("903");
-            String code904 = response.getString("904");
-            String code905 = response.getString("905");
-            String code906 = response.getString("906");
-            String code907 = response.getString("907");
-            String code908 = response.getString("908");
-            String code909 = response.getString("909");
-            String code910 = response.getString("910");
-
-//            mTextView.append("主机遥控编号：" + meCode + "\n");
-//            mTextView.append("当前车钟：" + code900 + "\n");
-
-//            detailText_1.setText("辅车钟状态" + "\n");
+            meCode = response.getString("meCode");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            code900 = response.getString("900");
+            currentShedingdang = Integer.parseInt(code900);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            code901 = response.getString("901");
+            //detailText_1.setText("辅车钟状态" + "\n");
             detailText_1.setText("");
             switch (code901) {
                 case "0":
@@ -347,6 +357,137 @@ public class DetailActivity extends AppCompatActivity {
                     detailText_1.append("有误");
                     break;
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            code902 = response.getString("902");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            code903 = response.getString("903");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            code904 = response.getString("904");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            code905 = response.getString("905");
+            //detailText_3.setText("控制位置" + "\n");
+            detailText_3.setText("");
+            switch (code905) {
+                case "0":
+                    detailText_3.append("机旁");
+                    break;
+                case "1":
+                    detailText_3.append("驾控室");
+                    break;
+                case "2":
+                    detailText_3.append("集控室");
+                    break;
+                default:
+                    detailText_3.append("有误");
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            code906 = response.getString("906");
+            //detailText_4.setText("控制模式" + "\n");
+            detailText_4.setText("");
+            switch (code906) {
+                case "0":
+                    detailText_4.append("闭环模式");
+                    break;
+                case "1":
+                    detailText_4.append("开环模式");
+                    break;
+                default:
+                    detailText_4.append("有误");
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            code907 = response.getString("907");
+            //detailText_2.setText("齿轮箱状态" + "\n");
+            detailText_2.setText("");
+            switch (code907) {
+                case "0":
+                    detailText_2.append("正车");
+                    break;
+                case "1":
+                    detailText_2.append("倒车");
+                    break;
+                case "2":
+                    detailText_2.append("空车");
+                    break;
+                default:
+                    detailText_2.append("有误");
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            code908 = response.getString("908");
+            currentMainSpeed = Integer.parseInt(code908);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            code909 = response.getString("909");
+            currentWeiSpeed = Integer.parseInt(code909);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            code910 = response.getString("910");
+            currentOilPercent = Integer.parseInt(code910);
+
+            switch (code907) {
+                case "0":                                  // 正车
+                    currentZhixingdang = Integer.parseInt(code910);
+                    break;
+                case "1":                                  // 倒车
+                    currentZhixingdang = 0 - Integer.parseInt(code910);
+                    break;
+                case "2":                                  // 空车
+                    currentZhixingdang = 0;
+                    break;
+                default:                                   // 有误
+                    currentZhixingdang = 0;
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        updateValue();
+
+//            String meCode = response.getString("meCode");
+//            String code900 = response.getString("900");
+//            String code901 = response.getString("901");
+//            String code902 = response.getString("902");
+//            String code903 = response.getString("903");
+//            String code904 = response.getString("904");
+//            String code905 = response.getString("905");
+//            String code906 = response.getString("906");
+//            String code907 = response.getString("907");
+//            String code908 = response.getString("908");
+//            String code909 = response.getString("909");
+//            String code910 = response.getString("910");
+
+//            mTextView.append("主机遥控编号：" + meCode + "\n");
+//            mTextView.append("当前车钟：" + code900 + "\n");
+
+
 
 //            switch (code902) {
 //                case "0":
@@ -375,77 +516,11 @@ public class DetailActivity extends AppCompatActivity {
 //            mTextView.append("主机设定转速：" + code904 + "RPM\n");
 
 
-//            detailText_3.setText("控制位置" + "\n");
-            detailText_3.setText("");
-            switch (code905) {
-                case "0":
-                    detailText_3.append("机旁");
-                    break;
-                case "1":
-                    detailText_3.append("驾控室");
-                    break;
-                case "2":
-                    detailText_3.append("集控室");
-                    break;
-                default:
-                    detailText_3.append("有误");
-                    break;
-            }
-
-//            detailText_4.setText("控制模式" + "\n");
-            detailText_4.setText("");
-            switch (code906) {
-                case "0":
-                    detailText_4.append("闭环模式");
-                    break;
-                case "1":
-                    detailText_4.append("开环模式");
-                    break;
-                default:
-                    detailText_4.append("有误");
-                    break;
-            }
-
-//            detailText_2.setText("齿轮箱状态" + "\n");
-            detailText_2.setText("");
-            switch (code907) {
-                case "0":
-                    detailText_2.append("正车");
-                    break;
-                case "1":
-                    detailText_2.append("倒车");
-                    break;
-                case "2":
-                    detailText_2.append("空车");
-                    break;
-                default:
-                    detailText_2.append("有误");
-                    break;
-            }
 
 //            valueText_1.setText(code908 + " RPM\n");
 //            valueText_2.setText(code909 + " RPM\n");
 //            valueText_3.setText(code910 + " %\n");
 
-            currentMainSpeed = Integer.parseInt(code908);
-            currentWeiSpeed = Integer.parseInt(code909);
-            currentOilPercent = Integer.parseInt(code910);
-            currentShedingdang = Integer.parseInt(code900);
-
-            switch (code907) {
-                case "0":                                  // 正车
-                    currentZhixingdang = Integer.parseInt(code910);
-                    break;
-                case "1":                                  // 倒车
-                    currentZhixingdang = 0 - Integer.parseInt(code910);
-                    break;
-                case "2":                                  // 空车
-                    currentZhixingdang = 0;
-                    break;
-                default:                                   // 有误
-                    currentZhixingdang = 0;
-                    break;
-            }
 
 //
 //            if (currentShedingdang < 0) {
@@ -458,13 +533,8 @@ public class DetailActivity extends AppCompatActivity {
 
 //            currentZhixingdang = Integer.parseInt(code900);
 
-            updateValue();
 
 
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 
 }
