@@ -14,13 +14,21 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cetcme.shipmonitor.DetailActivity;
-import com.cetcme.shipmonitor.ExpandableListViewActivity;
-import com.cetcme.shipmonitor.MoreInfoActivity;
 import com.cetcme.shipmonitor.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 
 
 public class ShipsFragment extends Fragment {
@@ -28,19 +36,25 @@ public class ShipsFragment extends Fragment {
     private String TAG = "ShipsFragment";
 
     private ExpandableListView list;
+    private ShipsFragment.ExpandableListAdapter adapter;
 
     //设置组视图的图片
     int[] logos = new int[] { R.drawable.tab1, R.drawable.tab2,R.drawable.tab3};
 
     //设置组视图的显示文字
-    private String[] category = new String[] { "长风77", "建工86", "xxx" };
+    private String[] category = new String[]{};
+//    { "长风77", "建工86", "xxx" };
 
     //子视图显示文字
-    private String[][] subCategory = new String[][] {
-            { "左机：宁动6700", "右机：宁动6700" },
-            { "左机：宁动6700", "右机：宁动6700" },
-            { "左机：宁动6700", "右机：宁动6700" }
-    };
+    private String[][] subCategory = new String[][]{};
+//
+//            {
+//            { "左机：宁动6700", "右机：宁动6700" },
+//            { "左机：宁动6700", "右机：宁动6700" },
+//            { "左机：宁动6700", "右机：宁动6700" }
+//    };
+
+    private String[][] meCodes = new String[][]{};
 
     //子视图图片
     public int[][] subLogos = new int[][] {
@@ -76,7 +90,7 @@ public class ShipsFragment extends Fragment {
         list = (ExpandableListView) view.findViewById(R.id.list);
 
         //创建一个BaseExpandableListAdapter对象
-        final ShipsFragment.ExpandableListAdapter adapter = new ShipsFragment.ExpandableListAdapter();
+        adapter = new ShipsFragment.ExpandableListAdapter();
 
         list.setAdapter(adapter);
         //为ExpandableListView的子列表单击事件设置监听器
@@ -90,6 +104,7 @@ public class ShipsFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 Bundle titleBundle = new Bundle();
                 titleBundle.putString("title", category[groupPosition] + " " + subCategory[groupPosition][childPosition]);
+                titleBundle.putString("meCode", meCodes[groupPosition][childPosition]);
                 intent.putExtras(titleBundle);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.push_left_in_no_alpha, R.anim.push_left_out_no_alpha);
@@ -97,7 +112,59 @@ public class ShipsFragment extends Fragment {
             }
         });
 
+        getListData();
+
         return view;
+    }
+
+    private void getListData() {
+        String url = getString(R.string.server_ip) + getString(R.string.list_url);
+
+        RequestParams params = new RequestParams();
+        params.put("shipNo", "hdyTest");
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(url, params, new JsonHttpResponseHandler("UTF-8"){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                // If the response is JSONObject instead of expected JSONArray
+
+
+
+                Log.i("post", "onSuccess: " + response);
+                try {
+//                    JSONArray array = null;
+//                    response.toJSONArray(array);
+                    JSONObject meCode_0 = response.getJSONObject(0);
+                    JSONObject meCode_1 = response.getJSONObject(1);
+//                    subCategory[0][0] = meCode_0.getString("controlName") + ": " + meCode_0.getString("meCode");
+//                    subCategory[0][1] = meCode_1.getString("controlName") + ": " + meCode_1.getString("meCode");
+//                    category[0]       = meCode_0.getString("shipName");
+
+                    category = new String[] { meCode_0.getString("shipName")};
+
+                    subCategory = new String[][] {
+                            { meCode_0.getString("controlName") + "：" + meCode_0.getString("meCode"), meCode_1.getString("controlName") + "：" + meCode_1.getString("meCode")},
+                    };
+
+                    meCodes = new String[][] {
+                            { meCode_0.getString("meCode"), meCode_1.getString("meCode")},
+                    };
+
+                    adapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                Toast.makeText(getActivity(), "获取列表错误", Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 
     class ExpandableListAdapter extends BaseExpandableListAdapter {

@@ -1,4 +1,4 @@
-package com.cetcme.shipmonitor;
+package com.cetcme.shipmonitor.useless;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -14,8 +14,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.cetcme.shipmonitor.Fragment.MoreInfoFragment_1;
-import com.cetcme.shipmonitor.Fragment.MoreInfoFragment_2;
+import com.cetcme.shipmonitor.R;
+import com.cetcme.shipmonitor.useless.MoreInfoFragment_1;
+import com.cetcme.shipmonitor.useless.MoreInfoFragment_2;
 import com.qiuhong.qhlibrary.QHTitleView.QHTitleView;
 
 import java.util.ArrayList;

@@ -4,7 +4,8 @@
     <!--服务器和API地址-->
     <string name="server_ip">http://114.55.101.20:8888</string>
     <string name="real_time_info">/index?c=curStatus</string>
-    <string name="test_url">http://114.55.101.20:8888/index?meCode=CETCME</string>
+    <string name="list_url">/list</string>
+    <string name="detail_info_url">/index</string>
 
     <!--登陆界面title-->
     <string name="title_login_view">智能船舶船东管理APP</string>

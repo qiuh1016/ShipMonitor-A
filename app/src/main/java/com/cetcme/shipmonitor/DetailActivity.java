@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
 import com.qiuhong.qhlibrary.QHTitleView.QHTitleView;
 import com.qiuhong.qhlibrary.Utils.DensityUtil;
@@ -27,6 +28,7 @@ public class DetailActivity extends AppCompatActivity {
     private String TAG = "DetailActivity";
 
     private String title;
+    private String meCode;
 
     private TextView pointImage1;
     private TextView pointImage2;
@@ -78,24 +80,10 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         getSupportActionBar().hide();
         title = getIntent().getExtras().getString("title");
+        meCode = getIntent().getExtras().getString("meCode");
 
         initNavigationView();
         initView();
-
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                currentMainSpeed = 300;
-//                currentWeiSpeed = 200;
-//                currentOilPercent = 40;
-//
-//                currentShedingdang = 20;
-//                currentZhixingdang = 30;
-//
-//                updateValue();
-//            }
-//        }, 5000);
-
 
         final int sleepTime = 5;
         getDataThread = new Thread(new Runnable() {
@@ -285,10 +273,13 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        String url = getString(R.string.test_url);
+        String url = getString(R.string.server_ip) + getString(R.string.detail_info_url);
+
+        RequestParams params = new RequestParams();
+        params.put("meCode", meCode);
 
         SyncHttpClient client = new SyncHttpClient();
-        client.get(url, null, new JsonHttpResponseHandler("UTF-8"){
+        client.get(url, params, new JsonHttpResponseHandler("UTF-8"){
             @Override
             public void onSuccess(int statusCode, Header[] headers, final JSONObject response) {
                 // If the response is JSONObject instead of expected JSONArray

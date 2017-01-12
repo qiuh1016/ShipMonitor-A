@@ -1,4 +1,4 @@
-package com.cetcme.shipmonitor;
+package com.cetcme.shipmonitor.useless;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.cetcme.shipmonitor.R;
 
 /**
  * Describe:</br>

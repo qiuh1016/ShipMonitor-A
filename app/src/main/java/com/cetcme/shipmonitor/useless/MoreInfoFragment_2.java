@@ -1,4 +1,4 @@
-package com.cetcme.shipmonitor.Fragment;
+package com.cetcme.shipmonitor.useless;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;

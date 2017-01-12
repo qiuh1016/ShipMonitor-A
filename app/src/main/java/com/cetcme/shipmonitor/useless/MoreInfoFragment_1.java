@@ -1,4 +1,4 @@
-package com.cetcme.shipmonitor.Fragment;
+package com.cetcme.shipmonitor.useless;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -41,7 +41,7 @@ public class MoreInfoFragment_1 extends Fragment {
     }
 
     private void getTestData() {
-        String url = getString(R.string.test_url);
+        String url = getString(R.string.server_ip) + getString(R.string.detail_info_url);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(url, null, new JsonHttpResponseHandler("UTF-8"){
