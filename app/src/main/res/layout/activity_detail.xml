@@ -5,7 +5,7 @@
               android:layout_height="match_parent"
               tools:context=".DetailActivity"
               android:orientation="vertical"
-              android:background="#EEEEEE">
+              android:background="@color/list_back_color">
 
     <!--导航栏-->
     <com.qiuhong.qhlibrary.QHTitleView.QHTitleView
@@ -35,7 +35,7 @@
                     android:layout_weight="1"
                     android:text="..."
                     android:id="@+id/detail_text_1"
-                    android:textColor="@color/text_color"
+                    android:textColor="@color/pointer_color"
                     android:background="@color/detail_label_background"
                     android:textAlignment="center"
                     android:gravity="center"/>
@@ -50,7 +50,7 @@
                     android:layout_weight="1"
                     android:text="...."
                     android:id="@+id/detail_text_2"
-                    android:textColor="@color/text_color"
+                    android:textColor="@color/pointer_color"
                     android:background="@color/detail_label_background"
                     android:textAlignment="center"
                     android:gravity="center"/>
@@ -65,7 +65,7 @@
                     android:layout_weight="1"
                     android:text="..."
                     android:id="@+id/detail_text_3"
-                    android:textColor="@color/text_color"
+                    android:textColor="@color/pointer_color"
                     android:background="@color/detail_label_background"
                     android:textAlignment="center"
                     android:gravity="center"/>
@@ -80,7 +80,7 @@
                     android:layout_weight="1"
                     android:text="..."
                     android:id="@+id/detail_text_4"
-                    android:textColor="@color/text_color"
+                    android:textColor="@color/pointer_color"
                     android:background="@color/detail_label_background"
                     android:textAlignment="center"
                     android:gravity="center"/>
@@ -136,12 +136,12 @@
                         android:layout_height="200dp"
                         android:layout_weight="1"
                         android:id="@+id/frame_1"
-                        android:background="@drawable/pic_yibiao_0_1500">
+                        android:background="@drawable/pic_yibiao_0_1500_no">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/pic_main_speed_point"
+                            android:background="@drawable/pic_main_speed_point_green"
                             android:id="@+id/imageView_point"/>
 
                     </FrameLayout>
@@ -157,7 +157,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/pic_main_speed_point"
+                            android:background="@drawable/pic_main_speed_point_green"
                             android:id="@+id/imageView_point_2"/>
 
                     </FrameLayout>

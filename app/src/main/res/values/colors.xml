@@ -5,13 +5,28 @@
     <color name="colorAccent">#FF4081</color>
     <color name="littleGray">#EEEEEE</color>
 
-    <color name="main_color">#059cd4</color>
-    <color name="tab_text_selected">#303F9F</color>
+    <!--<color name="main_color">#059cd4</color>  -->
+    <!--<color name="tab_text_selected">#303F9F</color>-->
+    <!--<color name="list_back_color">#EEEEEE</color>-->
+    <color name="main_color">#445D60</color>
+    <color name="tab_text_selected">#445D60</color>
+
+    <color name="list_back_color">#49656D</color>
+
+
     <color name="tab_text_normal">#696969</color>
     <color name="border_clo">#ccc</color>
 
-    <color name="detail_label_background">#A3C8E9</color>
+    <!--<color name="detail_label_background">#A3C8E9</color>-->
+    <color name="detail_label_background">#44759D8F</color>
+    <!--<color name="text_color">#333333</color>-->
+    <color name="text_color">#D4D6D9</color>
 
-    <color name="text_color">#333333</color>
-    <color name="pointer_color">#4A90E2</color>
+    <!--<color name="pointer_color">#4A90E2</color>   -->
+    <color name="pointer_color">#49CFB3</color>
+
+<!--loading-->
+    <color name="book_loading_background">#49656D</color>
+    <color name="book_loading_book">#ffffffff</color>
+    <color name="book_loading_page">#49656D</color>
 </resources>

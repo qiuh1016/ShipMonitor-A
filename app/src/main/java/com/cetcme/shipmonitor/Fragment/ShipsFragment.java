@@ -307,8 +307,8 @@ public class ShipsFragment extends Fragment {
 
             view.addView(innerView);
             int backColor = 230;
-            view.setBackgroundColor(Color.rgb(backColor, backColor, backColor));
-
+//            view.setBackgroundColor(Color.rgb(backColor, backColor, backColor));
+            view.setBackgroundColor(getActivity().getResources().getColor(R.color.list_back_color));
             return view;
         }
         //取得给定分组中给定子视图的ID. 该组ID必须在组中是唯一的.必须不同于其他所有ID（分组及子项目的ID）.

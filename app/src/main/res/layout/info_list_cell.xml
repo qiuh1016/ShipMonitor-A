@@ -8,7 +8,8 @@
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
     android:paddingLeft="12dp"
-    android:paddingRight="12dp">
+    android:paddingRight="12dp"
+    android:background="@color/list_back_color">
 
     <TextView
         android:layout_height="wrap_content"

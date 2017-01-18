@@ -2,6 +2,7 @@ package com.cetcme.shipmonitor;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRightClick() {
                 Log.i("11", "onRightClick: 111");
+                Intent intent = new Intent(getApplication(), TestActivity.class);
+                startActivity(intent);
             }
         });
     }
